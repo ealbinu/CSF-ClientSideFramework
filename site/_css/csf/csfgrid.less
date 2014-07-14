@@ -1,0 +1,40 @@
+
+.container(@mxWidth:@maxWidth, @sidePaddding:@gutter){
+    max-width: @mxWidth;
+    margin: 0 auto;
+    padding: 0 @sidePaddding;
+    position: relative;
+    overflow: hidden;
+}
+
+
+.col(@desktopCols:1, @push:0, @tabletCols:6, @mobileCols:12){
+    float: left;
+    padding: 0 @gutter;
+    box-sizing: border-box;
+    & when not (@push = 0){
+        position: relative;
+        left: (100%/@columns)*@push;
+        left: calc(100% / (@columns/@push));
+        left: -webkit-calc(100% / (@columns/@push));
+        left: -moz-calc(100% / (@columns/@push));
+    }
+    @media @desktop{
+        width: (100%/@columns)*@desktopCols;
+        width: calc(100% / (@columns/@desktopCols));
+        width: -webkit-calc(100% / (@columns/@desktopCols));
+        width: -moz-calc(100% / (@columns/@desktopCols));
+    }
+    @media @tablet{
+        width: (100%/@columns)*@tabletCols;
+        width: calc(100% / (@columns/@tabletCols));
+        width: -webkit-calc(100% / (@columns/@tabletCols));
+        width: -moz-calc(100% / (@columns/@tabletCols));
+    }
+    @media @mobile{
+        width: (100%/@columns)*@mobileCols;
+        width: calc(100% / (@columns/@mobileCols));
+        width: -webkit-calc(100% / (@columns/@mobileCols));
+        width: -moz-calc(100% / (@columns/@mobileCols));
+    }
+}

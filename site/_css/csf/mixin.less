@@ -1,0 +1,573 @@
+/**
+ * LESS Mixin
+ *
+ * This file contains some usefull LESSCSS mixins to use in your projects.
+ */
+
+
+
+
+
+
+
+/**
+ * CLEARFIX
+ * (from TwitterBootstrap)
+ */
+.clearfix, .clr {
+	
+	*zoom: 1;
+	
+	&:before, &:after {
+		display: table;
+		content: "";
+	}
+	
+	&:after {
+		clear: both;
+	}
+	
+}
+
+
+/**
+ * CSS image replacement
+ * (from TwitterBootstrap)
+ *
+ * I removed the border and background rule to allow element define it's own rules!
+ */
+.hide-text {
+  font: 0/0 a;
+  color: transparent;
+  text-shadow: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+ * TEXT ALIGN SHORTCUTS
+ * these rules are simple quick shortcuts to the "text-align" CSS property
+ */
+.ta( @align:left ) { text-align: @align }
+.tl { .ta( left ) }
+.tr { .ta( right ) }
+.tc { .ta( center ) }
+.tj { .ta( justify ) }
+
+
+
+
+
+
+
+/**
+ * TEXT STYLES SHORTCUTS
+ */
+.n, .normal { 		font-weight:		normal 			}
+.b, .bold { 		font-weight:		bold 			}
+.i, .italic { 		font-style: 		italic 			}
+.u, .underline { 	text-decoration:	underline 		}
+.s, .stroke { 		text-decoration: 	line-through 	}
+
+
+
+
+
+
+
+
+
+/**
+ * MARGIN SHORTCUTS
+ * these are shortcuts to the margin-{side} CSS property
+ */
+.mt ( @value:0 ) { margin-top: 		@value }
+.mr ( @value:0 ) { margin-right: 	@value }
+.mb ( @value:0 ) { margin-bottom: 	@value }
+.ml ( @value:0 ) { margin-left: 	@value }
+
+/**
+ * MARGIN - H / V
+ * these are shortcuts to set only horizontals or vertical margins without alter existing rules
+ * you can use these mixins with one value applied to the left/right, top/bottom margins or
+ * you can use them with separated values
+ */
+.mv( @value:0 ) { 			.mt(@value); 	.mb(@value); }
+.mv( @v1, @v2 ) { 			.mt(@v1); 		.mb(@v2); }
+
+.mh( @value:0 ) { 			.ml(@value); 	.mr(@value); }
+.mh( @v1, @v2 ) { 			.ml(@v1); 		.mr(@v2); }
+
+
+
+
+
+
+/**
+ * PADDING SHORTCUTS
+ * these are shortcuts to the padding-{side} CSS property
+ */
+.pt ( @value:0 ) { padding-top: 	@value }
+.pr ( @value:0 ) { padding-right: 	@value }
+.pb ( @value:0 ) { padding-bottom: 	@value }
+.pl ( @value:0 ) { padding-left: 	@value }
+
+/**
+ * PADDING - H / V
+ * these are shortcuts to set only horizontals or vertical paddings without alter existing rules
+ * you can use these mixins with one value applied to the left/right, top/bottom paddings or
+ * you can use them with separated values
+ */
+.pv( @value:0 ) { 			.pt(@value); 	.pb(@value); }
+.pv( @v1, @v2 ) { 			.pt(@v1); 		.pb(@v2); }
+
+.ph( @value:0 ) { 			.pl(@value); 	.pr(@value); }
+.ph( @v1, @v2 ) { 			.pl(@v1); 		.pr(@v2); }
+
+
+
+
+
+
+
+/**
+ * SIZING, BOXING and MASKING
+ */
+
+.none { display:none }
+
+/* size is inpired by the TwitterBootstrap mixin for arguments order. */
+/* this is a compatibility decision but I don't uderstand why to start with height!!! Why Twitter? Why? */
+.size( @h ) { 				height: @h }
+.size( null, @w ) { 		width: @w }
+.size( @h, @w ) { 			width: @w; height: @h }
+
+.block {					display:block }
+.block( @w ) {				.block; .size(null,@w) }
+.block( null, @h ) {		.block; .size(@h) }
+.block( @w, @h ) {			.block; .size(@h,@w) }
+
+/* inline-block backwards compatibilty hack */
+.inline-block {
+	display:				-moz-inline-stack;
+	display:				inline-block;
+	zoom:					1;
+	*display:				inline;
+}
+
+.inline-block( @w ) {		.inline-block; .size(null,@w) }
+.inline-block( null, @h ) {	.inline-block; .size(@h) }
+.inline-block( @w, @h ) {	.inline-block; .size(@h,@w) }
+
+/* inline-block shortcuts */
+.iblock {					.inline-block }
+.iblock( @w ) {				.inline-block(@w) }
+.iblock( null, @h ) {		.inline-block(null,@h) }
+.iblock( @w, @h ) {			.inline-block(@w,@h) }
+
+
+
+
+
+
+
+/**
+ * MASKING
+ */
+
+.mask {						.block;					overflow: hidden }
+.mask( @w ) {				.block(@w); 			.mask }
+.mask( null, @h ) {			.block(null,@h); 		.mask }
+.mask( @w, @h ) {			.block(@w,@h); 			.mask }
+
+.inline-mask {				.inline-block;			overflow: hidden }
+.inline-mask( @w ) {		.inline-block(@w);		.inline-mask }
+.inline-mask( null, @h ) {	.inline-block(null,@h);	.inline-mask }
+.inline-mask( @w, @h ) {	.inline-block(@w,@h); 	.inline-mask }
+
+.imask {					.inline-mask }
+.imask( @w ) {				.inline-mask(@w) }
+.imask( null, @h ) {		.inline-mask(null,@h) }
+.imask( @w, @h ) {			.inline-mask(@w,@h) }
+
+
+
+
+
+
+
+/**
+ * POSITIONING
+ */
+
+.rel {						position: relative }
+.rel( @v ) {				.rel; 				top:@v 					}
+.rel( null, @h ) {			.rel; 				left:@h 				}
+.rel( @v, @h ) {			.rel;				top:@v; 	left:@h 	}
+
+
+.abs {						position:absolute; 	top:0; 		left:0 		}
+.abs( @v ) {				.abs; 				top:@v 					}
+.abs( null, @h ) {			.abs; 				left:@h 				}
+.abs( @v, @h ) {			.abs;				top:@v; 	left:@h 	}
+
+.abs-r {					position:absolute; 	top:0; 		right:0 	}
+.abs-r( @v ) {				.abs-r; 			top:@v 					}
+.abs-r( null, @h ) {		.abs-r; 			right:@h 				}
+.abs-r( @v, @h ) {			.abs-r;				top:@v; 	right:@h 	}
+
+.abs-b {					position:absolute; 	bottom:0; 	left:0 		}
+.abs-b( @v ) {				.abs-b; 			bottom:@v 				}
+.abs-b( null, @h ) {		.abs-b; 			left:@h 				}
+.abs-b( @v, @h ) {			.abs-b;				bottom:@v; 	left:@h 	}
+
+.abs-br {					position:absolute; 	bottom:0; 	right:0 	}
+.abs-br( @v ) {				.abs-br; 			bottom:@v 				}
+.abs-br( null, @h ) {		.abs-br; 			right:@h 				}
+.abs-br( @v, @h ) {			.abs-br;			bottom:@v; 	right:@h 	}
+
+
+.l, .left{					float:left	}
+.r, .right{					float:right }
+
+
+
+
+
+
+
+
+
+/**
+ * CSS3 - Border Radius
+ */
+
+/* single border radius applied to all corners */
+.border-radius(@r) {
+	-webkit-border-radius:					@r;
+	-moz-border-radius: 					@r;
+	border-radius: 							@r;
+}
+
+/* two values applied tob/bottom then bottom/top */
+.border-radius( @rt, @rb ) {
+	-webkit-border-radius: 					@rt;
+	-webkit-border-bottom-right-radius: 	@rb;
+	-webkit-border-bottom-left-radius: 		@rb;
+	-moz-border-radius: 					@rt;
+	-moz-border-radius-bottomright: 		@rb;
+	-moz-border-radius-bottomleft: 			@rb;
+	border-radius: 							@rt;
+	border-bottom-right-radius: 			@rb;
+	border-bottom-left-radius: 				@rb;
+}
+.border-radius( @rt, @rb, tb ) {			.border-radius(@rt,@rb) }
+.border-radius( @rt, @rb, bt ) {			.border-radius(@rb,@rt) }
+
+
+/* two values - left/right right/left */
+.border-radius( @rl, @rr, lr ) {
+	-webkit-border-radius: 					@rl;
+	-webkit-border-top-right-radius: 		@rr;
+	-webkit-border-bottom-right-radius: 	@rr;
+	-moz-border-radius: 					@rl;
+	-moz-border-radius-topright: 			@rr;
+	-moz-border-radius-bottomright: 		@rr;
+	border-radius: 							@rl;
+	border-top-right-radius: 				@rr;
+	border-bottom-right-radius: 			@rr;
+}
+.border-radius( @rl, @rr, rl ) {			.border-radius(@rr,@rl,lr) }
+
+
+/* two values - topLeft/bottomRight topRight/bottomLeft */
+.border-radius( @r1, @r2, tlbr ) {
+	-webkit-border-radius: 					@r1;
+	-webkit-border-top-right-radius: 		@r2;
+	-webkit-border-bottom-left-radius: 		@r2;
+	-moz-border-radius: 					@r1;
+	-moz-border-radius-topright: 			@r2;
+	-moz-border-radius-bottomleft: 			@r2;
+	border-radius: 							@r1;
+	border-top-right-radius: 				@r2;
+	border-bottom-left-radius: 				@r2;
+}
+.border-radius( @r1, @r2, trbl ) {			.border-radius(@r2,@r1,tlbr) }
+.border-radius( @r, tlbr ) {				.border-radius(@r,0,tlbr) }
+.border-radius( @r, trbl ) {				.border-radius(0,@r,tlbr) }
+
+
+/* two values - top borders */
+.border-radius( @r, top ) {					.border-radius(@r,0) 				}
+.border-radius( @r, t ) {					.border-radius(@r,top) 				}
+.border-radius( @r, bottom ) {				.border-radius(@r,0,bt) 			}
+.border-radius( @r, b ) {					.border-radius(@r,bottom) 			}
+.border-radius( @r, left ) {				.border-radius(@r,0,lr) 			}
+.border-radius( @r, l ) {					.border-radius(@r,left) 			}
+.border-radius( @r, right ) {				.border-radius(@r,0,rl) 			}
+.border-radius( @r, r ) {					.border-radius(@r,right) 			}
+
+/* single border - radius */
+.border-radius( @r, tl ) {					.border-radius( @r, 0, 0, 0 ) 		}
+.border-radius( @r, tr ) {					.border-radius( 0, @r, 0, 0 ) 		}
+.border-radius( @r, br ) {					.border-radius( 0, 0, @r, 0 ) 		}
+.border-radius( @r, bl ) {					.border-radius( 0, 0, 0, @r ) 		}
+
+
+/* border-radius different for every corner */
+.border-radius( @r1, @r2, @r3, @r4 ) {
+	-webkit-border-top-left-radius: 		@r1;
+	-webkit-border-top-right-radius: 		@r2;
+	-webkit-border-bottom-right-radius: 	@r3;
+	-webkit-border-bottom-left-radius: 		@r4;
+	-moz-border-radius-topleft: 			@r1;
+	-moz-border-radius-topright: 			@r2;
+	-moz-border-radius-bottomright: 		@r3;
+	-moz-border-radius-bottomleft: 			@r4;
+	border-top-left-radius: 				@r1;
+	border-top-right-radius: 				@r2;
+	border-bottom-right-radius: 			@r3;
+	border-bottom-left-radius: 				@r4;
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+ * Sprites
+ */
+
+.sprite-pos {				background-position: 0 0 			}
+.sprite-pos( @x, @y ) {		background-position: -@x -@y		}
+.sprite-pos( @x ) {			.sprite-pos(@x,0)					}
+.sprite-pos( null, @y ) {	.sprite-pos(@0,y)					}
+
+
+.sprite( @img, @w, @h, @x, @y ) {
+	
+	.mask(@w,@h);
+	
+	.sprite-pos(@x,@y);
+	
+	.hide-text;
+	
+	background-image: ~"url( @{img}  )"
+	
+}
+
+.inline-sprite( @img, @w, @h, @x, @y ) {
+	
+	.inline-mask(@w,@h);
+	
+	.sprite-pos(@x,@y);
+	
+	.hide-text;
+	
+	background-image: ~"url( @{img}  )"
+	
+}
+
+.isprite( @img, @w, @h, @x, @y ) {
+	
+	.inline-sprite(@img,@w,@h,@x,@y)
+	
+}
+
+
+/**
+ * Vertical states sprite 
+ * usefull for 2 or 3 states buttons when state-related images
+ * are disposed vertically 
+ */
+.vsprite( @img, @w, @h, @x, @y, @y1 ) {
+	
+	.sprite(@img,@w,@h,@x,@y);
+	
+	&:hover {
+		
+		.sprite-pos( @x, @y1 );
+		
+	}
+	
+}
+
+.vsprite( @img, @w, @h, @x, @y, @y1, @y2 ) {
+	
+	.sprite(@img,@w,@h,@x,@y,@y1);
+	
+	&:active {
+		
+		.sprite-pos( @x, @y2 );
+		
+	}
+	
+}
+
+.sprite( @img, @w, @h, @x, @y, @y1 ) { 			.vsprite(@img,@w,@h,@x,@y,@y1) 		}
+.sprite( @img, @w, @h, @x, @y, @y1, @y2 ) { 	.vsprite(@img,@w,@h,@x,@y,@y1,@y2) 	}
+
+
+/**
+ * Horizontal states sprite 
+ * usefull for 2 or 3 states buttons when state-related images
+ * are disposed horizontally 
+ */
+.hsprite( @img, @w, @h, @x, @y, @x1 ) {
+	
+	.sprite(@img,@w,@h,@x,@y);
+	
+	&:hover {
+		
+		.sprite-pos( @x1, @y );
+		
+	}
+	
+}
+
+.hsprite( @img, @w, @h, @x, @y, @x1, @x2 ) {
+	
+	.hsprite(@img,@w,@h,@x,@y,@x1);
+	
+	&:active {
+		
+		.sprite-pos( @x2, @y );
+		
+	}
+	
+}
+
+
+
+
+
+
+
+
+
+
+/**
+ * Removes margins and 
+ */
+.clear-list {
+	margin:					0;
+	padding:				0;
+	list-style:				none;
+	list-style-position:	inside
+}
+
+/**
+ * Inline List
+ */
+
+.inline-list, .ilist {
+	
+	.clear-list;
+	
+	li { .iblock }
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+/**
+ * HIGHLIGHT
+ * php compiler safe implementation
+ */
+
+
+
+.highlight( @color, @blur, @distance ) {	text-shadow: 0 @distance @blur @color		}
+.highlight( @color, @blur ) { 				.highlight(@color,@blur,1px) 				}
+.highlight( @color ) { 						.highlight(@color,0,1px) 					}
+.highlight { 								.highlight(white) 							}
+
+.highlight( big, @color, @blur ) {			text-shadow: 0 1px @blur @color, 0 2px @blur @color, 0 3px @blur @color, 0 4px @blur @color	}
+.highlight( big, @color ) {					.highlight( big, @color, 0 )				}
+.highlight( big ) {							.highlight( big, #fff )						}
+
+.highlight( medium, @color, @blur ) {		text-shadow: 0 1px @blur @color, 0 2px @blur @color, 0 3px @blur @color	}
+.highlight( medium, @color ) {				.highlight( medium, @color, 0 )				}
+.highlight( medium ) {						.highlight( medium, #fff )					}
+
+.highlight( small, @color, @blur ) {		text-shadow: 0 1px @blur @color, 0 2px @blur @color	}
+.highlight( small, @color ) {				.highlight( small, @color, 0 )				}
+.highlight( small ) {						.highlight( small, #fff )						}
+
+.highlight( extra, @color, @blur ) {		text-shadow: 0 1px @blur @color, 0 2px @blur @color, 0 3px @blur @color, 0 4px @blur @color, 0 5px @blur @color, 0 6px @blur @color, 0 7px @blur @color, 0 8px @blur @color	}
+.highlight( extra, @color ) {				.highlight( extra, @color, 0 )				}
+.highlight( extra ) {						.highlight( extra, #fff )					}
+
+.highlight( text3d, @color, @blur ) {		text-shadow: 1px 1px @blur @color	}
+.highlight( text3d, @color ) {				.highlight( text3d, @color, 0 )				}
+.highlight( text3d ) {						.highlight( text3d, #fff )					}
+
+.highlight( text3dSmall, @color, @blur ) {	text-shadow: 1px 1px @blur @color, 2px 2px @blur @color, 3px 3px @blur @color	}
+.highlight( text3dSmall, @color ) {			.highlight( text3dSmall, @color, 0 )		}
+.highlight( text3dSmall ) {					.highlight( text3dSmall, #fff )				}
+
+.highlight( text3dMedium, @color, @blur ) {	text-shadow: 1px 1px @blur @color, 2px 2px @blur @color, 3px 3px @blur @color, 4px 4px @blur @color, 5px 5px @blur @color, 6px 6px @blur @color	}
+.highlight( text3dMedium, @color ) {		.highlight( text3dMedium, @color, 0 )		}
+.highlight( text3dMedium ) {				.highlight( text3dMedium, #fff )			}
+
+.highlight( text3dBig, @color, @blur ) {	text-shadow: 1px 1px @blur @color, 2px 2px @blur @color, 3px 3px @blur @color, 4px 4px @blur @color, 5px 5px @blur @color, 6px 6px @blur @color, 7px 7px @blur @color, 8px 8px @blur @color, 9px 9px @blur @color	}
+.highlight( text3dBig, @color ) {			.highlight( text3dBig, @color, 0 )			}
+.highlight( text3dBig ) {					.highlight( text3dBig, #fff )				}
+
+.highlight( text3dExtra, @color, @blur ) {	text-shadow: 1px 1px @blur @color, 2px 2px @blur @color, 3px 3px @blur @color, 4px 4px @blur @color, 5px 5px @blur @color, 6px 6px @blur @color, 7px 7px @blur @color, 8px 8px @blur @color, 9px 9px @blur @color, 10px 10px @blur @color, 11px 11px @blur @color, 12px 12px @blur @color, 13px 13px @blur @color, 14px 14px @blur @color, 15px 15px @blur @color	}
+.highlight( text3dExtra, @color ) {			.highlight( text3dExtra, @color, 0 )		}
+.highlight( text3dExtra ) {					.highlight( text3dExtra, #fff )				}
+
+.highlight( text3dIn, @color, @blur ) {		text-shadow: -1px -1px @blur @color	}
+.highlight( text3dIn, @color ) {			.highlight( text3dIn, @color, 0 )			}
+.highlight( text3dIn ) {					.highlight( text3dIn, #fff )				}
+
+.highlight( text3dInSmall, @color, @blur ) {text-shadow: -1px -1px @blur @color, -2px -2px @blur @color, -3px -3px @blur @color	}
+.highlight( text3dInSmall, @color ) {		.highlight( text3dInSmall, @color, 0 )		}
+.highlight( text3dInSmall ) {				.highlight( text3dInSmall, #fff )			}
+
+.highlight( text3dInMedium, @color, @blur ){text-shadow: -1px -1px @blur @color, -2px -2px @blur @color, -3px -3px @blur @color, -4px -4px @blur @color, -5px -5px @blur @color, -6px -6px @blur @color	}
+.highlight( text3dInMedium, @color ) {		.highlight( text3dInMedium, @color, 0 )		}
+.highlight( text3dInMedium ) {				.highlight( text3dInMedium, #fff )			}
+
+.highlight( text3dInBig, @color, @blur ) { 	text-shadow: -1px -1px @blur @color, -2px -2px @blur @color, -3px -3px @blur @color, -4px -4px @blur @color, -5px -5px @blur @color, -6px -6px @blur @color, -7px -7px @blur @color, -8px -8px @blur @color, -9px -9px @blur @color	}
+.highlight( text3dInBig, @color ) {			.highlight( text3dInBig, @color, 0 )		}
+.highlight( text3dInBig ) {					.highlight( text3dInBig, #fff )				}
+
+.highlight( text3dInExtra, @color, @blur ) {text-shadow: -1px -1px @blur @color, -2px -2px @blur @color, -3px -3px @blur @color, -4px -4px @blur @color, -5px -5px @blur @color, -6px -6px @blur @color, -7px -7px @blur @color, -8px -8px @blur @color, -9px -9px @blur @color, -10px -10px @blur @color, -11px -11px @blur @color, -12px -12px @blur @color, -13px -13px @blur @color, -14px -14px @blur @color, -15px -15px @blur @color	}
+.highlight( text3dInExtra, @color ) {		.highlight( text3dInExtra, @color, 0 )		}
+.highlight( text3dInExtra ) {				.highlight( text3dInExtra, #fff )			}
